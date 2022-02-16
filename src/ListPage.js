@@ -6,12 +6,16 @@ import ListItem from './ListItem';
 export default function ListPage() {
   const [listItems, setShoppingList] = useState([]);
 
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
   // on load, call the fetchItems function (remember: useEffect)
 
   async function fetchItems() {
     const fetchListItems = await getListItems();
     // fetch the list items and inject them into state
-    setShoppingList(fetchItems);
+    setShoppingList(fetchListItems);
   }
 
   async function handleDeleteClick() {
@@ -25,8 +29,14 @@ export default function ListPage() {
   return (
     <div className="list-page">
       <button onClick={handleDeleteClick}>New List</button>
+      <ListItemForm fetchItems={fetchItems} />
       {/* pass fetchItems to the ListItemForm component */}
       <div className='item-list'>
+        {
+          listItems.map(listItem => <ListItem key={listItem.id}
+            fetchItems={fetchItems}
+            listItem={listItem} />)
+        }
         {/* map through all the list items and render them here */}
       </div>
 
