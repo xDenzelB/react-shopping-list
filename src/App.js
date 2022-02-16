@@ -13,9 +13,18 @@ import ListPage from './ListPage';
 import './App.css';
 
 export default function App() {
+  const [user, setUser] = useState(null);
   // track the user in state
 
   // add a useEffect to get the user and inject the user object into state on load
+
+  useEffect(() => {
+    async function fetch() {
+      const user = await getUser();
+
+      if (user) setUser(user);
+    }
+  })
 
   async function handleLogout() {
     // call the logout function
