@@ -15,7 +15,8 @@ export default function ListItem({ fetchItems, listItem: {
     // on click, if it's already been bought, do nothing; otherwise, call the handleClick function
     <div className='list-item' onClick={has_been_bought ? () => {} : handleClick}>
       {/* if it's been bought, this p tag should have the 'bought' class. Otherwise it should have the 'needed' class */}
-      <p>
+      <p className={has_been_bought ? 'bought' : 'needed'}>
+        {quantity} {name}
         {/* show the quantity and name here */}
       </p>     
     </div>
